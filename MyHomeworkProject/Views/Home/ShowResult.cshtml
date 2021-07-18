@@ -1,0 +1,51 @@
+﻿@model MyHomeworkProject.Models.ViewModel
+
+@using (Html.BeginForm("AddLink", "Home", FormMethod.Post))
+{
+
+
+
+    <h2>@TempData["UserName"]</h2>
+
+    <p></p>
+    <table class="table">
+
+
+        @foreach (var item in Model.UserLinkSet)
+        {
+            <tr>
+
+                <td>
+                    <a target="_blank" href="http://cnn.com"> @Html.DisplayFor(modelItem => item.LinkName)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LinkURL)
+                </td>
+
+
+                <td>
+
+                    @Html.ActionLink("Delete", "Delete", new { linkId = item.linkId })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    @* Drop down list for Optional Links*@
+
+    <table class="table">
+        <tr>
+            <td>
+                You can add the following Links:
+            </td>
+            <td>
+                @Html.DropDownList("MissingLink", Model.AddLinkSet)
+            </td>
+            <td>
+
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Add Link" class="btn btn-default" />
+                </div>
+    </table>
+}
